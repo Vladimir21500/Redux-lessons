@@ -1,31 +1,17 @@
 import './index.scss';
-import store, { increment, decrement, reset } from './store';
+import store from './store';
+import { addUser, deleteUser } from './users.actions';
 
-const resultElem = document.querySelector('.counter__result');
-const incrementBtn = document.querySelector('[data-action="increment"]');
-const resetBtn = document.querySelector('[data-action="reset"]');
-const decrementBtn = document.querySelector('[data-action="decrement"]');
+store.dispatch(addUser(1, 'Vova'));
+store.dispatch(addUser(2, 'Viva'));
+store.dispatch(addUser(3, 'Vava'));
 
-const onIncrement = () => {
-  store.dispatch(increment());
-};
-
-const onDecrement = () => {
-  store.dispatch(decrement());
-};
-
-const onReset = () => {
-  store.dispatch(reset());
-};
-
-incrementBtn.addEventListener('click', onIncrement);
-decrementBtn.addEventListener('click', onDecrement);
-resetBtn.addEventListener('click', onReset);
+store.dispatch(deleteUser(2));
 
 store.subscribe(() => {
   const state = store.getState();
-  const currentValue = state.history.reduce((acc, value) => acc + +value, 0);
-  const historyString = state.history.join(' ');
 
-  resultElem.textContent = state.history.length === 1 ? '' : `${historyString} = ${currentValue}`;
+  console.log(state);
 });
+
+console.log(store.getState());
