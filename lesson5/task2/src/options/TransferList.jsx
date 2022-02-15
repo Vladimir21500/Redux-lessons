@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { optionsListSelector } from './options.selectors';
 import AvailableOptions from './AvailableOptions';
 import SelectedOptions from './SelectedOptions';
 
