@@ -8,12 +8,15 @@ const Wither = ({ weatherList, getWeather }) => {
   return (
     <main className="weather">
       <h1 className="weather__title">Weather data</h1>
-      {weatherList.map(city => (
-        <li className="city">
-          <span className="city__name">{city.name}</span>
-          <span className="city__temperature">{city.temperature}</span>
-        </li>
-      ))}
+      {weatherList.map(city => {
+        const [id, name, temperature] = Object.keys(city);
+        return (
+          <li key={city[id]} className="city">
+            <span className="city__name">{city[name]}</span>
+            <span className="city__temperature">{city[temperature]}</span>
+          </li>
+        );
+      })}
       <ul className="cities-list"></ul>
     </main>
   );
@@ -26,7 +29,7 @@ const mapState = state => {
 };
 
 const mapDispatch = {
-  getWeather: witherActions.fetchWeatherList,
+  getWeather: witherActions.getWeatherData,
 };
 
 const connector = connect(mapState, mapDispatch);
