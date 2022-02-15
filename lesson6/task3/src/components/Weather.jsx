@@ -3,17 +3,16 @@ import { connect } from 'react-redux';
 import { weatherListSelector } from '../weather/weather.selectors';
 import * as witherActions from '../weather/weather.actions';
 
-const Wither = ({ weatherList, getWeather }) => {
+const Weather = ({ weatherList, getWeather }) => {
   getWeather();
   return (
     <main className="weather">
       <h1 className="weather__title">Weather data</h1>
       {weatherList.map(city => {
-        const [id, name, temperature] = Object.keys(city);
         return (
-          <li key={city[id]} className="city">
-            <span className="city__name">{city[name]}</span>
-            <span className="city__temperature">{city[temperature]}</span>
+          <li key={city.id} className="city">
+            <span className="city__name">{city.name}</span>
+            <span className="city__temperature">{city.temperature}</span>
           </li>
         );
       })}
@@ -34,4 +33,4 @@ const mapDispatch = {
 
 const connector = connect(mapState, mapDispatch);
 
-export default connector(Wither);
+export default connector(Weather);
